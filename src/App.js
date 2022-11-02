@@ -11,24 +11,30 @@ const App = () => {
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
-  }
+  };
 
   const addToDo = () => {
-    setToDoList([...toDoList, { isComplete: false, value: inputValue }]);
+    setToDoList((current) => [...current, { isComplete: false, value: inputValue }]);
     setInputValue('');
-  }
+  };
 
   const toggleComplete = (index) => {
-    const newToDoList = [...toDoList];
-    newToDoList[index].isComplete = !newToDoList[index].isComplete;
-    setToDoList(newToDoList)
-  }
+    setToDoList((current) => current.map((item, i) => {
+      if (i === index) {
+        const newItem = Object.assign({}, item);
+        newItem.isComplete = !newItem.isComplete;
+        return newItem;
+      } else {
+        return item;
+      }
+    }));
+  };
 
   const getUncompletedToDoList = () => toDoList.filter(toDo => !toDo.isComplete);
 
   const removeAllCompletedToDo = () => {
-    setToDoList(getUncompletedToDoList())
-  }
+    setToDoList((current) => current.filter(toDo => !toDo.isComplete));
+  };
 
   return (
     <div className="app">
