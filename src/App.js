@@ -30,12 +30,12 @@ const App = () => {
     }));
   };
 
-  const filterUncompletedToDo = toDo => !toDo.isComplete;
+  const isUncompletedToDo = toDo => !toDo.isComplete;
 
-  const getUncompletedToDoList = () => toDoList.filter(filterUncompletedToDo);
+  const getUncompletedToDoList = () => toDoList.filter(isUncompletedToDo);
 
   const removeAllCompletedToDo = () => {
-    setToDoList((current) => current.filter(filterUncompletedToDo));
+    setToDoList((current) => current.filter(isUncompletedToDo));
   };
 
   return (
